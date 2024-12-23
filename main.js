@@ -107,4 +107,31 @@ function render(){ //A render függvény meghatározása.
         }
     }
 }
-render(); //A render függvényt meghívása.
+render(); //A render függvény meghívása.
+
+const form = document.getElementById('form'); //Az űrlapban lévő formnak az id-jének az elkérése.
+form.addEventListener('submit', function(e) { //A függvény meghívódik, a submit használatakor.
+    e.preventDefault(); //A böngésző alapértelmezett lefutásának a megakadályozása.
+    const harcHtmlElement = document.getElementById('harc_nev'); //A HtmlElement elkérése, amelynek a harc_nev az id-je.
+    const felek_1HtmlElement = document.getElementById('harcolo1'); //A HtmlElement elkérése, amelynek a harcolo1 az id-je.
+    const hadero_1HtmlElement = document.getElementById('hadero1'); //A HtmlElement elkérése, amelynek a hadero1 az id-je.
+    const felek_2HtmlElement = document.getElementById('harcolo2'); //A HtmlElement elkérése, amelynek a harcolo2 az id-je.
+    const hadero_2HtmlElement = document.getElementById('hadero2'); //A HtmlElement elkérése, amelynek a hadero2 az id-je.
+
+    const harcValue = harcHtmlElement.value; //A harcHtmlElement értékének belerakása egy változóba.
+    const felek_1Value = felek_1HtmlElement.value; //A felek_1HtmlElement értékének belerakása egy változóba.
+    const hadero_1Value = hadero_1HtmlElement.value; //A hadero_1HtmlElement értékének belerakása egy változóba.
+    const felek_2Value = felek_2HtmlElement.value === "" ? undefined : felek_2HtmlElement.value; //A felek_2HtmlElement értékének belerakása egy változóba. Amennyiben a felek_2HtmlElement-nek nincs értéke, akkor undefined lesz.
+    const hadero_2Value = hadero_2HtmlElement.value === "" ? undefined : hadero_2HtmlElement.value; //A hadero_2HtmlElement értékének belerakása egy változóba. Amennyiben a hadero_2HtmlElement-nek nincs értéke, akkor undefined lesz.
+
+    const newElement = { //A newElement létrehozása.
+        harc: harcValue, //Az harc értéke az harcValue lesz.
+        felek_1: felek_1Value, //Az felek_1 értéke az felek_1Value lesz.
+        hadero_1: hadero_1Value, //Az hadero_1 értéke az hadero_1Value lesz.
+        felek_2: felek_2Value, //Az felek_2 értéke az felek_2Value lesz.
+        hadero_2: hadero_2Value //Az hadero_2 értéke az hadero_2Value lesz.
+    }
+    array.push(newElement); //A newElement hozzáadása az arrayhez.
+    tbody.innerHTML = ''; //A táblázat tartalmának kitörlése.
+    render(); //A render függvény újra renderelése.
+})
