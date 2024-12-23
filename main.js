@@ -137,6 +137,24 @@ form.addEventListener('submit', function(e) { //A függvény meghívódik, a sub
         valid = false; //A valid változó értéke false lesz.
     }
 
+    if(felek_2HtmlElement.value === '' && hadero_2HtmlElement.value !== ''){ //Ha a felek_2 beviteli mezője üres, viszont a hadero_2 meg nem.
+        const parentElement = felek_2HtmlElement.parentElement; //A felek_2 beviteli mező parentElement property-jének az eltárolása egy változóban.
+        const errorplace = parentElement.querySelector('.error'); //A felek_2 beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
+        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
+            errorplace.innerHTML = "A harcoló fél és a haderő megadása kötelező"; //Akkor a harcoló fél és a haderő megadása kötelező hibaüzenetet dobja ki.
+        }
+        valid = false; //A valid változó értéke false lesz.
+    };
+    
+    if(hadero_2HtmlElement.value === '' && felek_2HtmlElement.value !== ''){ //Ha a hadero_2 beviteli mezője üres, viszont a felek_2 meg nem.
+        const parentElement = hadero_2HtmlElement.parentElement; //A hadero_2 beviteli mező parentElement property-jének az eltárolása egy változóban.
+        const errorplace = parentElement.querySelector('.error'); //A hadero_2 beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
+        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
+            errorplace.innerHTML = "A harcoló fél és a haderő megadása kötelező"; //Akkor a harcoló fél és a haderő megadása kötelező hibaüzenetet dobja ki.
+        }
+        valid = false; //A valid változó értéke false lesz.
+    };
+
     if(valid){ //Ha a valid változó értéke igaz(nem volt kihagyott mező).
         const harcValue = harcHtmlElement.value; //A harcHtmlElement értékének belerakása egy változóba.
         const felek_1Value = felek_1HtmlElement.value; //A felek_1HtmlElement értékének belerakása egy változóba.
