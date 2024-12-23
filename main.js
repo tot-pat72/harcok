@@ -137,23 +137,9 @@ form.addEventListener('submit', function(e) { //A függvény meghívódik, a sub
         valid = false; //A valid változó értéke false lesz.
     }
 
-    if(felek_2HtmlElement.value === '' && hadero_2HtmlElement.value !== ''){ //Ha a felek_2 beviteli mezője üres, viszont a hadero_2 meg nem.
-        const parentElement = felek_2HtmlElement.parentElement; //A felek_2 beviteli mező parentElement property-jének az eltárolása egy változóban.
-        const errorplace = parentElement.querySelector('.error'); //A felek_2 beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
-        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
-            errorplace.innerHTML = "A harcoló fél és a haderő megadása kötelező"; //Akkor a harcoló fél és a haderő megadása kötelező hibaüzenetet dobja ki.
-        }
+    if(!getNonEmptyFormHTMLField(felek_2HtmlElement, hadero_2HtmlElement, "A harcoló fél és a haderő megadása kötelező")){ //Ha getNonEmptyFormHTMLField függvény hamissal tér vissza, mind a bemeneti felek_2HtmlElement és az hadero_2HtmlElement esetén is.
         valid = false; //A valid változó értéke false lesz.
-    };
-    
-    if(hadero_2HtmlElement.value === '' && felek_2HtmlElement.value !== ''){ //Ha a hadero_2 beviteli mezője üres, viszont a felek_2 meg nem.
-        const parentElement = hadero_2HtmlElement.parentElement; //A hadero_2 beviteli mező parentElement property-jének az eltárolása egy változóban.
-        const errorplace = parentElement.querySelector('.error'); //A hadero_2 beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
-        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
-            errorplace.innerHTML = "A harcoló fél és a haderő megadása kötelező"; //Akkor a harcoló fél és a haderő megadása kötelező hibaüzenetet dobja ki.
-        }
-        valid = false; //A valid változó értéke false lesz.
-    };
+    }
 
     if(valid){ //Ha a valid változó értéke igaz(nem volt kihagyott mező).
         const harcValue = harcHtmlElement.value; //A harcHtmlElement értékének belerakása egy változóba.
@@ -186,5 +172,16 @@ function validateFormHTMLField(inputHTMLElement, errormessage){ //A validateForm
         }
         valid = false; //A valid változó értéke false lesz.
     }
+    return valid; //Visszatérés a valid változóval. Amely hamis, hogyha nem ment át a validáción. Ha meg ki van töltve, akkor igazzal tér vissza.
+}
+
+function getNonEmptyFormHTMLField(felek_2, hadero_2, errormessage){ //A getNonEmptyFormHTMLField függvény meghatározása.
+    let valid = true; //A valid változó létrehozása, ami a true értéket kapja.
+    if (!validateFormHTMLField(felek_2, errormessage) && hadero_2.value !== ''){ //Ha validateFormHTMLField függvény hamissal tér vissza, a bemeneti felek_2 esetén és a hadero_2.value nem egyenlő egy üres stringgel.
+        valid = false; //A valid változó értéke false lesz.
+    };
+    if (!validateFormHTMLField(hadero_2, errormessage) && felek_2.value !== ''){ //Ha validateFormHTMLField függvény hamissal tér vissza, a bemeneti hadero_2 esetén és a felek_2.value nem egyenlő egy üres stringgel.
+        valid = false; //A valid változó értéke false lesz.
+    };
     return valid; //Visszatérés a valid változóval. Amely hamis, hogyha nem ment át a validáción. Ha meg ki van töltve, akkor igazzal tér vissza.
 }
