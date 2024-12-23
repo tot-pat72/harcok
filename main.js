@@ -11,34 +11,34 @@ const array = [ //Az array tömb létrehozása.
         hadero: "70.000" //Értékadás az array 1.elem haderőnek.
     },
 
-    { //Az 2.sor objektum létrhozása.
+    { //Az array 2.elemének a létrehozása.
         felek: "Labanc", //Értékadás az array 2.elem szembenálló feleknek.
         hadero: "60.000" //Értékadás az array 2.elem haderőnek.
     },
 
-    { //Az 3.sor objektum létrhozása.
+    { //Az array 3.elemének a létrehozása.
         harc: "48-as szabadságharc", //Értékadás az array 3.elem harc megnevezésének.
         felek: "Osztrák császárság (+ Orosz birodalom)", //Értékadás az array 3.elem szembenálló feleknek.
         hadero: "170.000 (+ 200.000)" //Értékadás az array 3.elem haderőnek.
     },
 
-    { //Az 4.sor objektum létrhozása.
+    { //Az array 4.elemének a létrehozása.
         felek: "Magyar királyság", //Értékadás az array 4.elem szembenálló feleknek.
         hadero: "170.000" //Értékadás az array 4.elem haderőnek.
     },
 
-    { //Az 5.sor objektum létrhozása.
+    { //Az array 5.elemének a létrehozása.
         harc: "I. világháború", //Értékadás az array 5.elem harc megnevezésének.
         felek: "Antant", //Értékadás az array 5.elem szembenálló feleknek.
         hadero: "43 millió" //Értékadás az array 5.elem haderőnek.
     },
 
-    { //Az 6.sor objektum létrhozása.
+    { //Az array 6.elemének a létrehozása.
         felek: "Központi hatalmak", //Értékadás az array 6.elem szembenálló feleknek.
         hadero: "25 millió" //Értékadás az array 6.elem haderőnek.
     },
 
-    { //Az 7.sor objektum létrhozása.
+    { //Az array 7.elemének a létrehozása.
         harc: "Bosworthi csata", //Értékadás az array 7.elem harc megnevezésének.
         felek: "Angolok (York + Lancester)", //Értékadás az array 7.elem szembenálló feleknek.
         hadero: "15.000" //Értékadás az array 7.elem haderőnek.
