@@ -125,37 +125,25 @@ form.addEventListener('submit', function(e) { //A függvény meghívódik, a sub
     }
     let valid = true; //A valid valtozó kezdő értéke igaz.
 
-    const harcValue = harcHtmlElement.value; //A harcHtmlElement értékének belerakása egy változóba.
-    const felek_1Value = felek_1HtmlElement.value; //A felek_1HtmlElement értékének belerakása egy változóba.
-    const hadero_1Value = hadero_1HtmlElement.value; //A hadero_1HtmlElement értékének belerakása egy változóba.
-    const felek_2Value = felek_2HtmlElement.value === "" ? undefined : felek_2HtmlElement.value; //A felek_2HtmlElement értékének belerakása egy változóba. Amennyiben a felek_2HtmlElement-nek nincs értéke, akkor undefined lesz.
-    const hadero_2Value = hadero_2HtmlElement.value === "" ? undefined : hadero_2HtmlElement.value; //A hadero_2HtmlElement értékének belerakása egy változóba. Amennyiben a hadero_2HtmlElement-nek nincs értéke, akkor undefined lesz.
+    if(!validateFormHTMLField(harcHtmlElement, 'A harc nevének megadása kötelező')){ //Ha validateFormHTMLField függvény hamissal tér vissza, a bemeneti harcHtmlElement esetén.
+        valid = false; //A valid változó értéke false lesz.
+    }
 
-    if(harcValue === ''){ //Ha a harc beviteli mezője üres.
-        const parentElement = harcHtmlElement.parentElement; //A harc beviteli mező parentElement property-jének az eltárolása egy változóban.
-        const errorplace = parentElement.querySelector('.error'); //A harc beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
-        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
-            errorplace.innerHTML = 'A harc nevének megadása kötelező'; //Akkor a harc nevének megadása kötelező hibaüzenetet dobja ki.
-        }
-        valid = false; //A valid változó értéke hamis lesz.
+    if(!validateFormHTMLField(felek_1HtmlElement, 'A harcoló fél megadása kötelező')){ //Ha validateFormHTMLField függvény hamissal tér vissza, a bemeneti felek_1HtmlElement esetén.
+        valid = false; //A valid változó értéke false lesz.
     }
-    if(felek_1Value === ''){ //Ha a felek beviteli mezője üres.
-        const parentElement = felek_1HtmlElement.parentElement; //A felek beviteli mező parentElement property-jének az eltárolása egy változóban.
-        const errorplace = parentElement.querySelector('.error'); //A felek beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
-        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
-            errorplace.innerHTML = 'A harcoló fél megadása kötelező'; //Akkor a harcoló fél megadása kötelező hibaüzenetet dobja ki.
-        }
-        valid = false; //A valid változó értéke hamis lesz.
+
+    if(!validateFormHTMLField(hadero_1HtmlElement, 'A haderő megadása kötelező')){ //Ha validateFormHTMLField függvény hamissal tér vissza, a bemeneti hadero_1HtmlElement esetén.
+        valid = false; //A valid változó értéke false lesz.
     }
-    if(hadero_1Value === ''){ //Ha a haderő beviteli mezője üres.
-        const parentElement = hadero_1HtmlElement.parentElement; //A haderő beviteli mező parentElement property-jének az eltárolása egy változóban.
-        const errorplace = parentElement.querySelector('.error'); //A haderő beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
-        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
-            errorplace.innerHTML = 'A haderő megadása kötelező'; //Akkor a haderő megadása kötelező hibaüzenetet dobja ki.
-        }
-        valid = false; //A valid változó értéke hamis lesz.
-    }
+
     if(valid){ //Ha a valid változó értéke igaz(nem volt kihagyott mező).
+        const harcValue = harcHtmlElement.value; //A harcHtmlElement értékének belerakása egy változóba.
+        const felek_1Value = felek_1HtmlElement.value; //A felek_1HtmlElement értékének belerakása egy változóba.
+        const hadero_1Value = hadero_1HtmlElement.value; //A hadero_1HtmlElement értékének belerakása egy változóba.
+        const felek_2Value = felek_2HtmlElement.value === "" ? undefined : felek_2HtmlElement.value; //A felek_2HtmlElement értékének belerakása egy változóba. Amennyiben a felek_2HtmlElement-nek nincs értéke, akkor undefined lesz.
+        const hadero_2Value = hadero_2HtmlElement.value === "" ? undefined : hadero_2HtmlElement.value; //A hadero_2HtmlElement értékének belerakása egy változóba. Amennyiben a hadero_2HtmlElement-nek nincs értéke, akkor undefined lesz.
+
         const newElement = { //A newElement létrehozása.
             harc: harcValue, //Az harc értéke az harcValue lesz.
             felek_1: felek_1Value, //Az felek_1 értéke az felek_1Value lesz.
@@ -169,3 +157,16 @@ form.addEventListener('submit', function(e) { //A függvény meghívódik, a sub
         thisForm.reset(); //A form visszaállítása alaphelyzetbe.
     }
 })
+
+function validateFormHTMLField(inputHTMLElement, errormessage){ //A validateFormHTMLField függvény meghatározása.
+    let valid = true; //A valid változó létrehozása, ami a true értéket kapja.
+    if(inputHTMLElement.value === ''){ //Ha az inputHTMLElement.value beviteli mezője üres.
+        const parentElement = inputHTMLElement.parentElement; //Az inputHTMLElement beviteli mező parentElement property-jének az eltárolása egy változóban.
+        const errorplace = parentElement.querySelector('.error'); //Az inputHTMLElement beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
+        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
+            errorplace.innerHTML = errormessage; //Akkor a hibaüzenet megadása kell.
+        }
+        valid = false; //A valid változó értéke false lesz.
+    }
+    return valid; //Visszatérés a valid változóval. Amely hamis, hogyha nem ment át a validáción. Ha meg ki van töltve, akkor igazzal tér vissza.
+}
